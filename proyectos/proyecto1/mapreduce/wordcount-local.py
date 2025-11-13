@@ -7,19 +7,20 @@ import glob
 import codecs
 
 
-inputdir="."
+inputdir = "."
 
 if len(sys.argv) >= 1:
-	inputdir = sys.argv[1]
+    inputdir = sys.argv[1]
+
 
 def processdir(dir):
 
     dirList = glob.glob(dir)
-    wordcount={}
+    wordcount = {}
     for f in dirList:
-        wordcountfile(f,wordcount)
+        wordcountfile(f, wordcount)
     for w in wordcount:
-        print(w,wordcount[w])
+        print(w, wordcount[w])
 
 
 def wordcountfile(f, wordcount):
@@ -30,6 +31,7 @@ def wordcountfile(f, wordcount):
         else:
             wordcount[word] += 1
     file.close()
-    return wordcount        
+    return wordcount
+
 
 processdir(inputdir)
