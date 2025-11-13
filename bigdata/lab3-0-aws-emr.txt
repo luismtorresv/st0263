@@ -1,12 +1,14 @@
 ST0263 TÓPICOS ESPECIALES EN TELEMÁTICA
 
-Requisito: CADA ESTUDIANTE, EN SU REPOSITORIO GITHUB PARA LA MATERIA, 
-DEBERÁ DOCUMENTAR Y ADJUNTAR TODAS LAS EVIDENCIAS DE LA REALIZACIÓN DE LOS LABORATORIOS DE BIG DATA.
+Requisito: CADA ESTUDIANTE, EN SU REPOSITORIO GITHUB PARA LA MATERIA, DEBERÁ
+DOCUMENTAR Y ADJUNTAR TODAS LAS EVIDENCIAS DE LA REALIZACIÓN DE LOS
+LABORATORIOS DE BIG DATA.
 
-CADA ALUMNO, DEBERÁ ENVIAR EXPLICITAMENTE AL PROFESOR POR INTERACTIVA VIRTUAL, LA URL DEL REPOSITORIO Y DIRECTORIO
-DONDE TRABAJARÁ TODOS LOS LABS.
+CADA ALUMNO, DEBERÁ ENVIAR EXPLICITAMENTE AL PROFESOR POR INTERACTIVA VIRTUAL,
+LA URL DEL REPOSITORIO Y DIRECTORIO DONDE TRABAJARÁ TODOS LOS LABS.
 
-LAB 3-0: Crear un Cluster AWS EMR en Amazon para trabajar todos los laboratorios.
+LAB 3-0: Crear un Cluster AWS EMR en Amazon para trabajar todos los
+laboratorios.
 
 1. trabajo individual, cada estudiante deberá responder por estas actividades.
 
@@ -21,5 +23,7 @@ HACER LAS ACTIVIDADES PROPUESTAS EN LOS VIDEOS:
 
 Información adicional:
 
-* Creación de un clúster EMR (ver videos previamente enviados), activará HUE, recuerden que deben crear un user 'hadoop' con la clave que gusten.
-* También se deben conectar vía shell (ssh) al nodo master del clúster EMR, donde realizará las actividades de HDFS CLI
+* Creación de un clúster EMR (ver videos previamente enviados), activará HUE,
+  recuerden que deben crear un user 'hadoop' con la clave que gusten.
+* También se deben conectar vía shell (ssh) al nodo master del clúster EMR,
+  donde realizará las actividades de HDFS CLI

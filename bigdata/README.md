@@ -1,11 +1,11 @@
-# Universidad EAFIT
-# Curso ST0263 Tópicos Especiales en Telemática
+# Universidad EAFIT # Curso ST0263 Tópicos Especiales en Telemática
 
 ## CONEXIÓN AL CLUSTER
 
 ### Amazon EMR:
 
-Creando tu propio cluster, videos guia de como crear y usar cluser Amazon EMR con la cuenta  AWS Academy
+Creando tu propio cluster, videos guia de como crear y usar cluser Amazon EMR
+con la cuenta  AWS Academy
 
 ## DATASETS
 
@@ -13,7 +13,8 @@ Creando tu propio cluster, videos guia de como crear y usar cluser Amazon EMR co
 
 ### Crear y gestionar Clusters Amazon EMR
 
-Utilizando la cuenta de amazon academy, y los videos compartidos para la clase, aprender a crear:
+Utilizando la cuenta de amazon academy, y los videos compartidos para la clase,
+aprender a crear:
 
 * cluster Amazon EMR
 * AWS CLI
@@ -26,18 +27,21 @@ Utilizando la cuenta de amazon academy, y los videos compartidos para la clase, 
 
 VER MÁS INDICACIONES EN:
 
-* Todos los laboratorios, los debe documentar, con evidencias, en el documento: [st0263-252-labs-student.docx](st0263-252-labs-student.docx)
+* Todos los laboratorios, los debe documentar, con evidencias, en el documento:
+  [st0263-252-labs-student.docx](st0263-252-labs-student.docx)
 
 *[Lab3-1](lab3-1-hdfs-s3.txt)
 
-Copiar todos los archivos del [datasets](datasets) tanto en S3 (permanente) y en HDFS (temporales). 
+Copiar todos los archivos del [datasets](datasets) tanto en S3 (permanente) y
+en HDFS (temporales).
 
 * ver: [HDFS](01-hdfs)
 
-*[Lab3-2 Datalake con AWS S3 y Motor de consulta Glue y Athena](lab3-2-s3-glue-athena.pdf)
+*[Lab3-2 Datalake con AWS S3 y Motor de consulta Glue y
+Athena](lab3-2-s3-glue-athena.pdf)
 
-*[Lab3-3 Hadoop motor de consulta Hive + integrado con S3/Glue/Athena](lab3-3-hive.txt)
+*[Lab3-3 Hadoop motor de consulta Hive + integrado con
+S3/Glue/Athena](lab3-3-hive.txt)
 
-*[Lab3-4 Hadoop Spark desde EMR/JupyerHub y Google Colab, tanto Spark SQL como Spark DF](lab3-4-spark.md)
-
-
+*[Lab3-4 Hadoop Spark desde EMR/JupyerHub y Google Colab, tanto Spark SQL como
+Spark DF](lab3-4-spark.md)
