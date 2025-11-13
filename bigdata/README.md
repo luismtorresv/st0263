@@ -37,7 +37,7 @@ VER MÁS INDICACIONES EN:
 * Todos los laboratorios, los debe documentar, con evidencias, en el documento:
   [st0263-252-labs-student.docx](st0263-252-labs-student.docx)
 
-*[Lab3-1](lab3-1-hdfs-s3.md)
+*[Lab3-1](01-hdfs/lab3-1-hdfs-s3.md)
 
 Copiar todos los archivos del [datasets](datasets) tanto en S3 (permanente) y
 en HDFS (temporales).
@@ -48,7 +48,7 @@ en HDFS (temporales).
 Athena](lab3-2-s3-glue-athena.pdf)
 
 *[Lab3-3 Hadoop motor de consulta Hive + integrado con
-S3/Glue/Athena](lab3-3-hive.md)
+S3/Glue/Athena](03-spark/lab3-3-hive.md)
 
 *[Lab3-4 Hadoop Spark desde EMR/JupyerHub y Google Colab, tanto Spark SQL como
 Spark DF](lab3-4-spark.md)
