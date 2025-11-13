@@ -1,50 +1,95 @@
-# info de la materia: STxxxx <nombre>
-#
-# Estudiante(s): nombre, email-eafit
-#
-# Profesor: nombre, email-eafit
-#
-# <para borrar: EL OBJETIVO DE ESTA DOCUMENTACÍON ES QUE CUALQUIER LECTOR CON EL REPO, EN ESPECIAL EL PROFESOR, ENTIENDA EL ALCANCE DE LO DESARROLLADO Y QUE PUEDA REPRODUCIR SIN EL ESTUDIANTE EL AMBIENTE DE DESARROLLO Y EJECUTAR Y USAR LA APLICACIÓN SIN PROBLEMAS>
+# Metadata
 
-# <para borrar: renombre este archivo a README.md cuando lo vaya a usar en un caso específico>
+* Curso: <código> <nombre>
 
-# nombre del proyecto, lab o actividad
-#
-# 1. breve descripción de la actividad
-#
-<texto descriptivo>
-## 1.1. Que aspectos cumplió o desarrolló de la actividad propuesta por el profesor (requerimientos funcionales y no funcionales)
+* Estudiante(s): (<nombre> (<email-uni>))+
 
-## 1.2. Que aspectos NO cumplió o desarrolló de la actividad propuesta por el profesor (requerimientos funcionales y no funcionales)
+* Profesor: <nombre> (<email-uni>)
 
-# 2. información general de diseño de alto nivel, arquitectura, patrones, mejores prácticas utilizadas.
+<!--
+El objetivo de esta documentación es que cualquier lector con el repo, en
+especial el profesor, entienda el alcance de lo desarrollado y que pueda
+reproducir sin el estudiante el ambiente de desarrollo y ejecutar y usar la
+aplicación sin problemas.
+-->
 
-# 3. Descripción del ambiente de desarrollo y técnico: lenguaje de programación, librerias, paquetes, etc, con sus numeros de versiones.
+<!--
+Renombre este archivo a README.md cuando lo vaya a usar en un caso específico.
+-->
 
-## como se compila y ejecuta.
-## detalles del desarrollo.
-## detalles técnicos
-## descripción y como se configura los parámetros del proyecto (ej: ip, puertos, conexión a bases de datos, variables de ambiente, parámetros, etc)
-## opcional - detalles de la organización del código por carpetas o descripción de algún archivo. (ESTRUCTURA DE DIRECTORIOS Y ARCHIVOS IMPORTANTE DEL PROYECTO, comando 'tree' de linux)
-## 
-## opcionalmente - si quiere mostrar resultados o pantallazos 
+# Nombre del proyecto, lab o actividad
 
-# 4. Descripción del ambiente de EJECUCIÓN (en producción) lenguaje de programación, librerias, paquetes, etc, con sus numeros de versiones.
+## 1. Breve descripción de la actividad
 
-# IP o nombres de dominio en nube o en la máquina servidor.
+### 1.1. Aspectos cumplidos y/o desarrollados de la actividad propuesta por el profesor
 
-## descripción y como se configura los parámetros del proyecto (ej: ip, puertos, conexión a bases de datos, variables de ambiente, parámetros, etc)
+<!-- Requerimientos funcionales y no funcionales -->
 
-## como se lanza el servidor.
+### 1.2. Aspectos NO cumplidos y/o desarrollados de la actividad propuesta por el profesor
 
-## una mini guia de como un usuario utilizaría el software o la aplicación
+<!-- Requerimientos funcionales y no funcionales -->
 
-## opcionalmente - si quiere mostrar resultados o pantallazos 
+## 2. Información general de diseño de alto nivel
 
-# 5. otra información que considere relevante para esta actividad.
+### 2.3 Arquitectura
 
-# referencias:
-<debemos siempre reconocer los créditos de partes del código que reutilizaremos, así como referencias a youtube, o referencias bibliográficas utilizadas para desarrollar el proyecto o la actividad>
-## sitio1-url 
-## sitio2-url
-## url de donde tomo info para desarrollar este proyecto
+### 2.4 Patrones
+
+### 2.5 Mejores prácticas utilizadas
+
+## 3. Descripción del ambiente de desarrollo y técnico
+
+### 3.1 Lenguaje de programación
+
+<!-- Con números de versiones -->
+
+### 3.2 Bibliotecas
+
+<!-- Con números de versiones -->
+
+### 3.3 Paquetes
+
+<!-- Con números de versiones -->
+
+### 3.4 Adicionales
+
+## 4. Cómo correr el programa
+
+### 4.1 Compilación
+
+### 4.2 Ejecución
+
+## 5. Detalles de desarrollo
+
+## 6. Detalles técnicos
+
+## 7. Configuración de entorno del proyecto
+
+<!-- Por ejemplo, direcciones IPs, puertos, conexión a bases de datos, variables de ambiente, parámetros, etc. -->
+
+<!-- Opcional: Detalles de la organización del código por carpetas o descripción de algún archivo.
+(Estructura de directorios y archivos importante del proyecto. Usar el comando 'tree' en sistemas Linux.) -->
+
+## 8. Resultados o capturas de pantalla
+
+<!-- Esta sección es opcional. -->
+
+## 9. Guía de cómo un usuario utilizaría el software o la aplicación
+
+## 10. Información adicional
+
+<!-- Cualquier cosa que considere relevante. -->
+
+## 11. Referencias
+
+<!--
+Debemos siempre reconocer los créditos de partes del código que reutilizaremos,
+así como referencias a youtube, o referencias bibliográficas utilizadas para
+desarrollar el proyecto o la actividad.
+
+* [Nombre de la página](sitio-1-url)
+* [Nombre de la página](sitio-2-url)
+* …
+*
+* [Nombre de la página](sitio-N-url)
+-->
