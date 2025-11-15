@@ -1,2 +1,8 @@
-#!/bin/bash
-sudo python3 -m pip install boto3 nltk scipy scikit-learn pandas
+#!/usr/bin/env bash
+
+sudo python3 -m pip install \
+    boto3 \
+    nltk \
+    pandas \
+    scikit-learn \
+    scipy
