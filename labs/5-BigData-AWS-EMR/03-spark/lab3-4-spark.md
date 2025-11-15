@@ -59,7 +59,7 @@ Los datos los van a obtener de:
 
 * https://www.datos.gov.co/Salud-y-Protecci-n-Social/Casos-positivos-de-COVID-19-en-Colombia/gt2j-8ykr/data
 
-o en los [datasets](datasets) hay datos ejemplo de covid19 para colombia.
+o en los [datasets](../datasets) hay datos ejemplo de covid19 para colombia.
 
 #### Responder a las siguientes preguntas de negocio tanto con procesamiento
 con Dataframes como en SparkSQL:
@@ -80,11 +80,10 @@ Reiteración: estas preguntas de negocio deben ser resueltas tanto en Dataframes
 como en SQL con Spark.
 
 Requerimiento, los datos de salida de estas 5 preguntas de negocio, deben ser
-salvadas en archivos tanto en formato .csv como .parquet.      
+salvadas en archivos tanto en formato .csv como .parquet.
 
 Los datos deben ser salvados en S3 y en Google Drive segun sea el ambiente de
 ejecución.
 
 Debe probarlos en ambos ambientes de ejecución y adjuntar como evidencia los
 notebooks en colab y emr, con los resultados en cada celda ejecutada.
-

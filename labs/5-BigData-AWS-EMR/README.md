@@ -48,7 +48,7 @@ en HDFS (temporales).
 Athena](lab3-2-s3-glue-athena.pdf)
 
 *[Lab3-3 Hadoop motor de consulta Hive + integrado con
-S3/Glue/Athena](03-spark/lab3-3-hive.md)
+S3/Glue/Athena](02-hive/lab3-3-hive.md)
 
 *[Lab3-4 Hadoop Spark desde EMR/JupyerHub y Google Colab, tanto Spark SQL como
-Spark DF](lab3-4-spark.md)
+Spark DF](03-spark/lab3-4-spark.md)
