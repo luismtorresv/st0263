@@ -2,21 +2,20 @@
 
 ## Resumen de lo que sigue
 
-En este cluster deben hacer:
+En este cluster copiar archivos:
 
-* Copiar (gestión) de archivos hacia el HDFS vía HUE.
+| Por | Hacia |
+|---|---|
+| Hue | HDFS |
+| SSH | HDFS |
+| Hue | S3 |
+| SSH | S3 |
 
-* Copiar (gestión) de archivos hacia el HDFS vía SSH.
+Recordar que los de HDFS son efímeros o temporales, es decir, se borran cuando
+se borra el clúster.
 
-Recuerden que estos datos de HDFS son efímeros o temporales y se borran cuando
-se borre el clúster.
-
-* Copiar (gestión) de archivos hacia AWS S3 vía HUE.
-
-* Copiar (gestión) de archivos hacia el AWS S3 vía SSH.
-
-En esta infraestructura, cada alumno deberá realizar el copiado de los archivos
-datasets de [datasets](../../../datasets)
+En esta infraestructura, deberá realizar el copiado de
+[`datasets`](../../../datasets).
 
 ## 1. Conectarse al nodo principal del clúster
 
