@@ -78,7 +78,7 @@ hdfs dfs -ls /user/hive/warehouse/${DB_NAME}.db/hdi
 ### Tabla externa con HDFS
 
 ```sql
-USE usernamedb;
+USE ${username}db;
 CREATE EXTERNAL TABLE HDI (id INT, country STRING, hdi FLOAT, lifeex INT, mysch INT, eysch INT, gni INT)
 ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
 STORED AS TEXTFILE
@@ -88,7 +88,7 @@ LOCATION '/user/hadoop/datasets/onu2/hdi/'
 ### Tabla externa con S3
 
 ```sql
-use usernamedb;
+use ${username}db;
 CREATE EXTERNAL TABLE HDI (id INT, country STRING, hdi FLOAT, lifeex INT, mysch INT, eysch INT, gni INT)
 ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
 STORED AS TEXTFILE
@@ -100,7 +100,7 @@ LOCATION 's3://${bucket-name}/datasets/onu2/hdi/'
 > Esta tabla la crea en una base de datos `mydb`.
 
 ```sql
-USE usernamedb;
+USE ${username}db;
 SHOW TABLES;
 DESCRIBE hdi;
 ```
@@ -139,7 +139,7 @@ WHERE
 - Iniciar Hive y crear la tabla `EXPO`
 
     ```sql
-    use usernamedb;
+    use ${username}db;
     CREATE EXTERNAL TABLE EXPO (country STRING, expct FLOAT)
     ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
     STORED AS TEXTFILE
@@ -160,7 +160,7 @@ WHERE
 ### Creación de la tabla
 
 ```sql
-use usernamedb;
+use ${username}db;
 ```
 
 #### Si es con HDFS
