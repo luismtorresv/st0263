@@ -75,35 +75,28 @@ hdfs dfs -mkdir /user/hadoop/datasets
 hdfs dfs -mkdir /user/hadoop/datasets/gutenberg-small
 ```
 
-* Archivos locales en el filesytem del nodo maestro:
+#### Copiar `gutenberg-small` de nodo maestro a HDFS
 
 ```shell
 hdfs dfs -put ~/st0263/datasets/gutenberg-small/*.txt /user/hadoop/datasets/gutenberg-small/
 hdfs dfs -ls /user/hadoop/datasets/gutenberg-small/
 ```
 
-* Archivos en Amazon S3:
+#### Copiar `datasets/airlines.csv` de S3 a HDFS
 
 ```shell
 hadoop distcp s3://${username_datalake}/datasets/airlines.csv /tmp/
 hdfs dfs -ls /tmp/
 ```
 
-* Copia recursiva de datos:
+#### Copiar `datasets` del sistema de archivos local al HDFS
 
 ```shell
 hdfs dfs -copyFromLocal ~/st0263/datasets/* /user/hadoop/datasets/
 hdfs dfs -ls /user/hadoop/datasets
 ```
 
-* Listar archivos:
-
-```shell
-hdfs dfs -ls /user/hadoop/datasets
-hdfs dfs -ls /user/hadoop/datasets/gutenberg-small/
-```
-
-### Copiar archivos de HDFS hacia el servidor local (gateway)
+#### Copiar archivos de HDFS hacia el sistema de archivos local
 
 ```shell
 hdfs dfs -get /user/hadoop/datasets/gutenberg-small/* ~<username>/mis_datasets/
