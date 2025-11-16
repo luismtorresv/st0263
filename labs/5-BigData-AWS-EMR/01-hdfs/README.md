@@ -146,32 +146,32 @@ chgrp <group> files      cambiar el grupo de un archivo
 
 ### Login
 
-![login](hue-hdfs/hue-01-login.png)
+![login](screenshots/hue-01-login.png)
 
-![filemenu](hue-hdfs/hue-02-Files.png)
+![filemenu](screenshots/hue-02-Files.png)
 
 ### Explorar archivos
 
-![explorar](hue-hdfs/hue-03-FileBrowser.png)
+![explorar](screenshots/hue-03-FileBrowser.png)
 
 ### Crear un directorio
 
-![Crear directorio](hue-hdfs/hue-04-FileNew.png)
+![Crear directorio](screenshots/hue-04-FileNew.png)
 
-![Crear directorio](hue-hdfs/hue-05-FileNewDir1.png)
+![Crear directorio](screenshots/hue-05-FileNewDir1.png)
 
-![Crear directorio](hue-hdfs/hue-06-FileNewDir2.png)
+![Crear directorio](screenshots/hue-06-FileNewDir2.png)
 
 ### Subir archivos
 
-![Subir archivos](hue-hdfs/hue-07-FileUpload1.png)
+![Subir archivos](screenshots/hue-07-FileUpload1.png)
 
-![Subir archivos](hue-hdfs/hue-08-FileUpload2.png)
+![Subir archivos](screenshots/hue-08-FileUpload2.png)
 
-![Subir archivos](hue-hdfs/hue-09-FileUpload3.png)
+![Subir archivos](screenshots/hue-09-FileUpload3.png)
 
-![Subir archivos](hue-hdfs/hue-10-FileBrowser.png)
+![Subir archivos](screenshots/hue-10-FileBrowser.png)
 
 ### Ver contenido de un archivo
 
-![Ver archivo](hue-hdfs/hue-11-FileOpen.png)
+![Ver archivo](screenshots/hue-11-FileOpen.png)
