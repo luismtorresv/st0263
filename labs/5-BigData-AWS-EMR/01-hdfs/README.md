@@ -92,7 +92,7 @@ hdfs dfs -ls /tmp/
 * Copia recursiva de datos:
 
 ```shell
-hdfs dfs -copyFromLocal /home/ec2-home/st0263-252/bigdata/datasets/* /user/hadoop/datasets/
+hdfs dfs -copyFromLocal ~/st0263/datasets/* /user/hadoop/datasets/
 ```
 
 * Listar archivos:
