@@ -117,25 +117,23 @@ ls -l mis_datasets
 
 ### Probar otros commandos
 
-Se aplica los siguientes comandos a:
+Los comandos a continuación se usan como:
 
 ```shell
-hdfs dfs -<command>
+hdfs dfs -{command}
 ```
 
-Otros comandos:
-
-```
-du <path>             uso de disco en bytes
-mv <src> <dest>       mover archive(s)
-cp <src> <dest>       copiar archivo(s)
-rm <path>             borrar archive(s)
-put <localSrc> <dest-hdfs> copiar local a hdfs
-cat <file-name>       mostrar contenido de archivo
-chmod [-R] mode       cambiar los permisos de un archivo
-chown <username> files   cambiar el dueño de un archivo
-chgrp <group> files      cambiar el grupo de un archivo
-```
+| Comando | Propósito |
+|:--|:--|
+| `du <path>` | uso de disco en bytes |
+| `mv <src> <dest>` | mover archivo(s) |
+| `cp <src> <dest>` | copiar archivo(s) |
+| `rm <path>` | borrar archivo(s) |
+| `put <src-local> <dest-HDFS>` | copiar local a hdfs |
+| `cat <file-name>` | mostrar contenido de archivo |
+| `chmod [-R] mode` | cambiar los permisos de un archivo |
+| `chown <username> files` | cambiar el dueño de un archivo |
+| `chgrp <group> files` | cambiar el grupo de un archivo |
 
 ## 3. Gestión de archivos vía Hue
 
