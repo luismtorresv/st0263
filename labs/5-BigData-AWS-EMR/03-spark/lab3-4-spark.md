@@ -59,7 +59,7 @@ Los datos los van a obtener de:
 
 * https://www.datos.gov.co/Salud-y-Protecci-n-Social/Casos-positivos-de-COVID-19-en-Colombia/gt2j-8ykr/data
 
-o en los [datasets](../datasets) hay datos ejemplo de covid19 para colombia.
+o en los [datasets](../../../datasets) hay datos ejemplo de covid19 para colombia.
 
 #### Responder a las siguientes preguntas de negocio tanto con procesamiento
 con Dataframes como en SparkSQL:

@@ -16,7 +16,7 @@ con la cuenta  AWS Academy
 
 ## DATASETS
 
-* [datasets](datasets)
+* [datasets](../../datasets)
 
 ### Crear y gestionar Clusters Amazon EMR
 
@@ -39,7 +39,7 @@ VER MÁS INDICACIONES EN:
 
 *[Lab3-1](01-hdfs/lab3-1-hdfs-s3.md)
 
-Copiar todos los archivos del [datasets](datasets) tanto en S3 (permanente) y
+Copiar todos los archivos del [datasets](../../datasets) tanto en S3 (permanente) y
 en HDFS (temporales).
 
 * ver: [HDFS](01-hdfs)

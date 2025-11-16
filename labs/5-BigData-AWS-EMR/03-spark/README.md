@@ -52,10 +52,10 @@
     %spark2.sql
     SHOW database
 
-    %spark2.sql    
+    %spark2.sql
     USE <user_vpn>
 
-    %spark2.sql   
+    %spark2.sql
     CREATE EXTERNAL TABLE <user_vpn>.docs2 (line STRING) stored as textfile location '/datasets/gutenberg-small/*.txt'
 
     %spark2.sql
@@ -68,7 +68,7 @@
 ### Dataframes y preparación de datos en pyspark
 
 * notebook: [Data_processing_using_PySpark.ipynb](Data_processing_using_PySpark.ipynb)
-* datos ejemplo: [sample_data.csv](../datasets/spark/sample_data.csv)
+* datos ejemplo: [sample_data.csv](../../../datasets/spark/sample_data.csv)
 
 ### Manejo de notebooks en EMR
 

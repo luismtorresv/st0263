@@ -16,7 +16,7 @@ se borre el clúster.
 * Copiar (gestión) de archivos hacia el AWS S3 vía SSH.
 
 En esta infraestructura, cada alumno deberá realizar el copiado de los archivos
-datasets de [datasets](../datasets/)
+datasets de [datasets](../../../datasets)
 
 ## 1. Conectarse el clúster
 
@@ -36,7 +36,7 @@ ssh -i ~/vockey.pem hadoop@ec2.compute-1.amazonaws.com
 
 > [!NOTE]
 >
-> Puede encontrar los datasets en el directorio [`datasets`](../datasets).
+> Puede encontrar los datasets en el directorio [`datasets`](../../../datasets).
 
 ### Listar archivos en HDFS
 
