@@ -78,7 +78,7 @@ hdfs dfs -mkdir /user/hadoop/datasets/gutenberg-small
 * Archivos locales en el filesytem del nodo maestro:
 
 ```shell
-hdfs dfs -put /home/ec2-home/st0263-252/bigdata/datasets/gutenberg-small/*.txt /user/hadoop/datasets/gutenberg-small/
+hdfs dfs -put ~/st0263/datasets/gutenberg-small/*.txt /user/hadoop/datasets/gutenberg-small/
 ```
 
 * Archivos en Amazon S3:
