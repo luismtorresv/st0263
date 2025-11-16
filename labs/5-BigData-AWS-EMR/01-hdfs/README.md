@@ -53,7 +53,7 @@ Posiblemente necesite instalar git con el comando `sudo dnf install git`.
 hdfs dfs -ls /
 hdfs dfs -ls /user
 hdfs dfs -ls /user/hadoop
-hdfs dfs -ls /user/hadoop/datasets
+hdfs dfs -ls /user/hadoop/datasets  # Verá que este directorio no existe.
 ```
 
 ### Crear un directorio `datasets` en HDFS
