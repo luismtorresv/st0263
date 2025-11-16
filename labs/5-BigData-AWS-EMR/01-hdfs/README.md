@@ -18,9 +18,7 @@ se borre el clúster.
 En esta infraestructura, cada alumno deberá realizar el copiado de los archivos
 datasets de [datasets](../../../datasets)
 
-## 1. Conectarse el clúster
-
-### Por la terminal
+## 1. Conectarse al nodo principal del clúster
 
 Cada quien tiene su propio servidor EC2 del máster en EMR:
 
@@ -28,15 +26,17 @@ Cada quien tiene su propio servidor EC2 del máster en EMR:
 ssh -i ~/vockey.pem hadoop@ec2.compute-1.amazonaws.com
 ```
 
+Clonar este repositorio (pues contiene los datasets).
+
+> [!NOTE]
+>
+> Puede encontrar los datasets en el directorio [`datasets`](../../../datasets).
+
 ## 2. Gestión de archivos en HDFS vía la terminal
 
 1. Cargar los datos de los datasets de trabajo del tutorial en HDFS.
 2. Crear un directorio `datasets` en su 'home' (p. ej. `/user/hadoop`) en HDFS.
 3. En `datasets` los archivos ya deben estar descomprimidos para ser procesables.
-
-> [!NOTE]
->
-> Puede encontrar los datasets en el directorio [`datasets`](../../../datasets).
 
 ### Listar archivos en HDFS
 
@@ -46,11 +46,6 @@ ssh -i ~/vockey.pem hadoop@ec2.compute-1.amazonaws.com
 > diferencia es que `hdfs dfs` es solo para sistemas de archivos HDFS, pero
 > `hadoop fs` soporta otros adicionales como Amazon S3.
 
-Clone este repositorio (pues contiene los datasets:
-
-```shell
-git clone https://github.com/st0263eafit/st0263-252.git
-```
 
 ```shell
 hdfs dfs -ls /
@@ -67,11 +62,10 @@ hdfs dfs -mkdir /user/hadoop/datasets
 
 ### Copiar archivos locales (al servidor gateway) hacia HDFS
 
-Se asume que tiene los datos **locales** en `datasets` en el
-gateway.
+Se asume que tiene los datos **locales** en `datasets` en el gateway.
 
-También están en este repositorio, y por terminal debería copiarlos por SSH/SCP al
-servidor Gateway por la VPN.
+También están en este repositorio, y por terminal debería copiarlos por SSH/SCP
+al servidor gateway por la VPN.
 
 También están en Amazon S3: `s3://username_datalake/datasets`
 
