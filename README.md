@@ -1,17 +1,35 @@
-# st0263-2025-2
+# ST0263 — 2025-2
 
-## Instalación de docker en AMI Ubuntu:22.04
+## Instalación de Docker en Ubuntu:22.04
 
-### Instalar docker en ubuntu:22.04
+### Instalación
 
-    sudo apt update
-    sudo apt install docker.io -y
-    sudo apt install docker-compose -y
+```shell
+sudo apt update
+sudo apt install docker.io -y
+sudo apt install docker-compose -y
+```
 
-    sudo systemctl enable docker
-    sudo systemctl start docker
-### para AWS:
-    sudo usermod -a -G docker ubuntu 
+### Activación de servicios
 
-### para GCP: cuando crea las VM le asigna su propio username, fijese en el y cambielo así:
-    sudo usermod -a -G docker <username>
+```shell
+sudo systemctl enable docker
+sudo systemctl start docker
+```
+
+### Permisos
+
+#### Para AWS
+
+```shell
+sudo usermod -a -G docker ubuntu
+```
+
+#### Para GCP
+
+Cuando crea las VM, GCP le asigna el username que tiene usted en GCP.
+Fíjese en este y cámbielo así:
+
+```shell
+sudo usermod -a -G docker ${USERNAME}
+```
