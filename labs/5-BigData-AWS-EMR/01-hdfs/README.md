@@ -1,105 +1,160 @@
-# Universidad EAFIT
-# Curso ST0263 Tópicos Especiales en Telemática
+# Laboratorio 3-1: Usar el HDFS
 
-# Laboratorio HDFS
+## Resumen de lo que sigue
 
-## 1. CONECTARSE AL CLUSTER AMAZON EMR:
+En este cluster deben hacer:
 
-## Por Terminal: (cada quien tiene su propio servidor ec2 del master EMR)
+* Copiar (gestión) de archivos hacia el HDFS vía HUE.
 
-        $ ssh -i ~/vockey.pem hadoop@ec2.compute-1.amazonaws.com
+* Copiar (gestión) de archivos hacia el HDFS vía SSH.
 
-## 2. GESTIÓN DE ARCHIVOS EN HDFS VÍA TERMINAL
+Recuerden que estos datos de HDFS son efímeros o temporales y se borran cuando
+se borre el clúster.
 
-1. Cargar los datos de los datasets de trabajo del tutorial en HDFS 
-2. Cada participante creara en hdfs un directorio 'datasets' en su 'home' (/user/hadoop)
-3. En 'datasets' los archivos ya deben estar descomprimidos para ser procesables.
-4. Datasets: [datasets](../datasets)
+* Copiar (gestión) de archivos hacia AWS S3 vía HUE.
 
-### Listar archivos HDFS
+* Copiar (gestión) de archivos hacia el AWS S3 vía SSH.
 
-Para efectos de esta guia, es equivalente el comando "hadoop fs" y "hdfs dfs". La diferencia es que "hdfs dfs" es solo para sistemas de archivos HDFS, pero "hadoop fs" soporta otros adicionales como Amazon S3.
+En esta infraestructura, cada alumno deberá realizar el copiado de los archivos
+datasets de [datasets](../datasets/)
 
-verifique que haya clonado el repo de la materia previamente:
+## 1. Conectarse el clúster
 
-    git clone https://github.com/st0263eafit/st0263-252.git
+### Por la terminal
 
-    user@master$ hdfs dfs -ls /
-    user@master$ hdfs dfs -ls /user
-    user@master$ hdfs dfs -ls /user/hadoop
-    user@master$ hdfs dfs -ls /user/hadoop/datasets
+Cada quien tiene su propio servidor EC2 del máster en EMR:
 
-### Crear tu propio directorio de 'datasets' en HDFS
+```bash
+ssh -i ~/vockey.pem hadoop@ec2.compute-1.amazonaws.com
+```
 
-    user@master$ hdfs dfs -mkdir /user/hadoop/datasets
+## 2. Gestión de archivos en HDFS vía la terminal
+
+1. Cargar los datos de los datasets de trabajo del tutorial en HDFS.
+2. Crear un directorio `datasets` en su 'home' (p. ej. `/user/hadoop`) en HDFS.
+3. En `datasets` los archivos ya deben estar descomprimidos para ser procesables.
+
+> [!NOTE]
+>
+> Puede encontrar los datasets en el directorio [`datasets`](../datasets).
+
+### Listar archivos en HDFS
+
+> [!NOTE]
+>
+> Para efectos de esta guía, es equivalente `hadoop fs` y `hdfs dfs`. La
+> diferencia es que `hdfs dfs` es solo para sistemas de archivos HDFS, pero
+> `hadoop fs` soporta otros adicionales como Amazon S3.
+
+Clone este repositorio (pues contiene los datasets:
+
+```shell
+git clone https://github.com/st0263eafit/st0263-252.git
+```
+
+```shell
+hdfs dfs -ls /
+hdfs dfs -ls /user
+hdfs dfs -ls /user/hadoop
+hdfs dfs -ls /user/hadoop/datasets
+```
+
+### Crear un directorio `datasets` en HDFS
+
+```shell
+hdfs dfs -mkdir /user/hadoop/datasets
+```
 
 ### Copiar archivos locales (al servidor gateway) hacia HDFS
 
-Se asume que tiene los datos LOCALES se encuentran en /datasets en el gateway
-También están en este github, y por terminal debería copiarlos por SSH/SCP al servidor Gateway por la VPN.
-También están en Amazon S3:      s3://username_datalake/datasets
+Se asume que tiene los datos **locales** en `datasets` en el
+gateway.
 
-    user@master$ hdfs dfs -mkdir /user/hadoop/datasets
-    user@master$ hdfs dfs -mkdir /user/hadoop/datasets/gutenberg-small
+También están en este repositorio, y por terminal debería copiarlos por SSH/SCP al
+servidor Gateway por la VPN.
 
-* archivos locales FS en el emr-master:
+También están en Amazon S3: `s3://username_datalake/datasets`
 
-    user@master$ hdfs dfs -put /home/ec2-home/st0263-252/bigdata/datasets/gutenberg-small/*.txt /user/hadoop/datasets/gutenberg-small/
+```shell
+hdfs dfs -mkdir /user/hadoop/datasets
+hdfs dfs -mkdir /user/hadoop/datasets/gutenberg-small
+```
 
-* archivos en Amazon s3:
+* Archivos locales en el filesytem del nodo maestro:
 
-    user@master$ hadoop distcp s3://username_datalake/datasets/airlines.csv /tmp/
+```shell
+hdfs dfs -put /home/ec2-home/st0263-252/bigdata/datasets/gutenberg-small/*.txt /user/hadoop/datasets/gutenberg-small/
+```
 
-* copia recursiva de datos
-    
-    user@master$ hdfs dfs -copyFromLocal /home/ec2-home/st0263-252/bigdata/datasets/* /user/hadoop/datasets/
+* Archivos en Amazon S3:
 
-listar archivos: 
+```shell
+hadoop distcp s3://username_datalake/datasets/airlines.csv /tmp/
+```
 
-    user@master$ hdfs dfs -ls /user/hadoop/datasets
-    user@master$ hdfs dfs -ls /user/hadoop/datasets/gutenberg-small/
+* Copia recursiva de datos:
 
-### **Copiar archivos de HDFS hacia el servidor local (gateway)
+```shell
+hdfs dfs -copyFromLocal /home/ec2-home/st0263-252/bigdata/datasets/* /user/hadoop/datasets/
+```
 
-    user@master$ hdfs dfs -get /user/hadoop/datasets/gutenberg-small/* ~<username>/mis_datasets/    (el directorio 'mis_datasets' debe estar creado)
+* Listar archivos:
 
-otro comando para traer:
+```shell
+hdfs dfs -ls /user/hadoop/datasets
+hdfs dfs -ls /user/hadoop/datasets/gutenberg-small/
+```
 
-    user@master$ hdfs dfs -copyToLocal /user/hadoop/datasets/gutenberg/gutenberg-small.zip ~<username>/mis_datasets/
+### Copiar archivos de HDFS hacia el servidor local (gateway)
 
-    user@master$ ls -l mis_datasets
+```shell
+hdfs dfs -get /user/hadoop/datasets/gutenberg-small/* ~<username>/mis_datasets/
+```
+El directorio `mis_datasets` debe estar creado.
+
+Otro comando para traer los datos:
+
+```shell
+hdfs dfs -copyToLocal /user/hadoop/datasets/gutenberg/gutenberg-small.zip ~<username>/mis_datasets/
+
+ls -l mis_datasets
+```
 
 ### Probar otros commandos
 
 Se aplica los siguientes comandos a:
 
-    user@master$ hdfs dfs -<command>
+```shell
+hdfs dfs -<command>
+```
 
-comandos:
+Otros comandos:
 
-    du <path>             uso de disco en bytes
-    mv <src> <dest>       mover archive(s)
-    cp <src> <dest>       copiar archivo(s)
-    rm <path>             borrar archive(s)
-    put <localSrc> <dest-hdfs> copiar local a hdfs
-    cat <file-name>       mostrar contenido de archivo
-    chmod [-R] mode       cambiar los permisos de un archivo
-    chown <username> files   cambiar el dueño de un archivo
-    chgrp <group> files      cambiar el grupo de un archivo
+```
+du <path>             uso de disco en bytes
+mv <src> <dest>       mover archive(s)
+cp <src> <dest>       copiar archivo(s)
+rm <path>             borrar archive(s)
+put <localSrc> <dest-hdfs> copiar local a hdfs
+cat <file-name>       mostrar contenido de archivo
+chmod [-R] mode       cambiar los permisos de un archivo
+chown <username> files   cambiar el dueño de un archivo
+chgrp <group> files      cambiar el grupo de un archivo
+```
 
-# 3. GESTIÓN DE ARCHIVOS VÍA HUE en AMAZON EMR
+## 3. Gestión de archivos vía Hue
 
-## ** Login
+### Login
 
 ![login](hue-hdfs/hue-01-login.png)
 
 ![filemenu](hue-hdfs/hue-02-Files.png)
 
-## ** Explorar archivos
+### Explorar archivos
 
 ![explorar](hue-hdfs/hue-03-FileBrowser.png)
 
-## ** Crear un directorio
+### Crear un directorio
 
 ![Crear directorio](hue-hdfs/hue-04-FileNew.png)
 
@@ -107,7 +162,7 @@ comandos:
 
 ![Crear directorio](hue-hdfs/hue-06-FileNewDir2.png)
 
-## ** Subir (upload) archivos
+### Subir archivos
 
 ![Subir archivos](hue-hdfs/hue-07-FileUpload1.png)
 
@@ -117,6 +172,6 @@ comandos:
 
 ![Subir archivos](hue-hdfs/hue-10-FileBrowser.png)
 
-## ** Ver contenido de un archivo
+### Ver contenido de un archivo
 
 ![Ver archivo](hue-hdfs/hue-11-FileOpen.png)
