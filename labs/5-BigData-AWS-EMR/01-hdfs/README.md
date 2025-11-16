@@ -70,14 +70,16 @@ hdfs dfs -mkdir /user/hadoop/datasets
 >    y debería copiarlos por SCP al servidor gateway por la VPN (?).
 > 3. También están en Amazon S3: `s3://${bucket_name}/datasets`
 
+#### Preparación
+
 ```shell
 hdfs dfs -mkdir /user/hadoop/datasets
-hdfs dfs -mkdir /user/hadoop/datasets/gutenberg-small
 ```
 
 #### Copiar `gutenberg-small` de nodo maestro a HDFS
 
 ```shell
+hdfs dfs -mkdir /user/hadoop/datasets/gutenberg-small
 hdfs dfs -put ~/st0263/datasets/gutenberg-small/*.txt /user/hadoop/datasets/gutenberg-small/
 hdfs dfs -ls /user/hadoop/datasets/gutenberg-small/
 ```
