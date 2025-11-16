@@ -1,22 +1,13 @@
-ST0263 TÓPICOS ESPECIALES EN TELEMÁTICA
+# Laboratorio 3-0: Crear un clúster EMR en AWS
 
-LAB 3-0: Crear un Cluster AWS EMR en Amazon para trabajar todos los
-laboratorios.
+## Vídeos paso a paso para la creación del clúter
 
-1. trabajo individual, cada estudiante deberá responder por estas actividades.
+- Parte 1: https://www.youtube.com/watch?v=MyXSwxN5Zdk
+- Parte 2: https://www.youtube.com/watch?v=3sao-qJG34Y
 
-2. seguir los lineamientos del github:
+## Información adicional
 
-https://github.com/st0263eafit/st0263-252/tree/main/bigdata
+- Ver [la guía de configuración del clúster](guia-configuracion-aws_emr-7.10.0-hadoop_spark.pdf).
 
-HACER LAS ACTIVIDADES PROPUESTAS EN LOS VIDEOS:
-
-* https://www.youtube.com/watch?v=MyXSwxN5Zdk
-* https://www.youtube.com/watch?v=3sao-qJG34Y
-
-Información adicional:
-
-* Creación de un clúster EMR (ver videos previamente enviados), activará HUE,
-  recuerden que deben crear un user 'hadoop' con la clave que gusten.
-* También se deben conectar vía shell (ssh) al nodo master del clúster EMR,
+- También se deben conectar vía shell (ssh) al nodo master del clúster EMR,
   donde realizará las actividades de HDFS CLI
