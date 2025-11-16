@@ -85,7 +85,7 @@ hdfs dfs -ls /user/hadoop/datasets/gutenberg-small/
 * Archivos en Amazon S3:
 
 ```shell
-hadoop distcp s3://username_datalake/datasets/airlines.csv /tmp/
+hadoop distcp s3://${username_datalake}/datasets/airlines.csv /tmp/
 ```
 
 * Copia recursiva de datos:
