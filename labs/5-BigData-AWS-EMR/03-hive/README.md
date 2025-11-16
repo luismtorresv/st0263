@@ -20,7 +20,7 @@ Estarán guardados en:
 CREATE DATABASE ${username}db;
 ```
 
-### Crear la tabla HDI manejada por Hive (`/user/hive/warehouse`):
+### Crear la tabla HDI manejada por Hive
 
 ```sql
 use ${username}db;
