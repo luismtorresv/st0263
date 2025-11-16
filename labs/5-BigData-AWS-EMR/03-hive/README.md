@@ -25,9 +25,21 @@ CREATE DATABASE ${username}db;
 ```sql
 use ${username}db;
 
-CREATE TABLE HDI (id INT, country STRING, hdi FLOAT, lifeex INT, mysch INT, eysch INT, gni INT)
-ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
+
+CREATE TABLE HDI (
+    id INT,
+    country STRING,
+    hdi FLOAT,
+    lifeex INT,
+    mysch INT,
+    eysch INT,
+    gni INT
+)
+
+ROW FORMAT DELIMITED FIELDS
+TERMINATED BY ','
 STORED AS TEXTFILE
+TBLPROPERTIES ("skip.header.line.count"="1");
 ```
 
 ### Cargar datos a la tabla
