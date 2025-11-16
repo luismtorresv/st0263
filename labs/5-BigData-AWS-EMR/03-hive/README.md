@@ -105,11 +105,31 @@ SHOW TABLES;
 DESCRIBE hdi;
 ```
 
+## Consultas
+
 Hacer consultas y cálculos sobre la tabla `hdi`:
 
+### Ejemplos
+
+#### Listar todo
+
 ```sql
-select * from hdi;
-select country, gni from hdi where gni > 2000;
+SELECT
+    *
+FROM
+    hdi;
+```
+
+#### Filtrar por `gni`
+
+```sql
+SELECT
+    country,
+    gni
+FROM
+    hdi
+WHERE
+    gni > 2000;
 ```
 
 ### Ejecutar un `JOIN` con Hive
