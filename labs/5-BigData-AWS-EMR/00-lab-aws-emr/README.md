@@ -11,3 +11,8 @@
 
 - También se deben conectar vía shell (ssh) al nodo master del clúster EMR,
   donde realizará las actividades de HDFS CLI
+
+- Ver el [script para la configuración de arranque](install-my-jupyter-libraries.sh).
+
+- Ver el ejemplo de JupyterHub como [notebook](ejemplo-emr-jupyterhub-python-paquetes.ipynb)
+  o como [PDF](ejemplo-emr-jupyterhub-python-paquetes.pdf).
