@@ -93,6 +93,7 @@ hdfs dfs -ls /tmp/
 
 ```shell
 hdfs dfs -copyFromLocal ~/st0263/datasets/* /user/hadoop/datasets/
+hdfs dfs -ls /user/hadoop/datasets
 ```
 
 * Listar archivos:
