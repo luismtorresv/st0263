@@ -2,7 +2,11 @@
 
 ## Tablas sencillas en Hive
 
-Los archivos de trabajo hdi-data.csv y export-data.csv
+Los archivos de trabajo del dataset de la `onu`:
+- `hdi-data.csv`
+- `export-data.csv`
+
+Estarán guardados en:
 
 ```shell
 /user/hadoop/datasets/onu
@@ -10,30 +14,31 @@ Los archivos de trabajo hdi-data.csv y export-data.csv
 
 ## Gestión (DDL) y Consultas (DQL)
 
-Crear una base de datos:
+### Crear una base de datos
 
 ```sql
 CREATE DATABASE ${username}db;
 ```
 
-Crear la tabla HDI en Hive:
+### Crear la tabla HDI manejada por Hive (`/user/hive/warehouse`):
 
-tabla manejada por hive: /user/hive/warehouse
 ```sql
-use usernamedb;
+use ${username}db;
+
 CREATE TABLE HDI (id INT, country STRING, hdi FLOAT, lifeex INT, mysch INT, eysch INT, gni INT)
 ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
 STORED AS TEXTFILE
 ```
 
-se requiere cargar datos a la tabla asi:
-copiando datos directamente hacia hdfs:///warehouse/tablespace/managed/hive/mydb.db/hdi
+### Cargar datos a la tabla
+
+Copiar directamente hacia `hdfs:///warehouse/tablespace/managed/hive/mydb.db/hdi`.
 
 ```shell
 hdfs dfs -cp hdfs:///user/hadoop/datasets/onu/hdi-data.csv hdfs:///warehouse/tablespace/managed/hive/hadoopdb.db/hdi
 ```
 
-Cargando datos desde Hive:
+### Cargando datos desde Hive
 
 Darle permisos completos al directorio con:
 
@@ -47,7 +52,7 @@ Cargar los datos:
 LOAD DATA inpath '/user/hadoop/datasets/onu/hdi-data.csv' INTO TABLE HDI
 ```
 
-Tabla externa con HDFS:
+### Tabla externa con HDFS
 
 ```sql
 USE usernamedb;
@@ -57,7 +62,7 @@ STORED AS TEXTFILE
 LOCATION '/user/hadoop/datasets/onu2/hdi/'
 ```
 
-Tabla externa con S3:
+### Tabla externa con S3
 
 ```sql
 use usernamedb;
@@ -66,7 +71,6 @@ ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
 STORED AS TEXTFILE
 LOCATION 's3://${bucket-name}/datasets/onu2/hdi/'
 ```
-
 
 > [!NOTE]
 >
@@ -78,7 +82,7 @@ SHOW TABLES;
 DESCRIBE hdi;
 ```
 
-hacer consultas y cálculos sobre la tabla HDI:
+Hacer consultas y cálculos sobre la tabla `hdi`:
 
 ```sql
 select * from hdi;
@@ -86,6 +90,7 @@ select country, gni from hdi where gni > 2000;
 ```
 
 ### Ejecutar un `JOIN` con Hive
+
 - Obtener los datos base: `export-data.csv`
 - Usar los datos en [`datasets`](../../../datasets/) de este repositorio.
 - Iniciar Hive y crear la tabla `EXPO`
