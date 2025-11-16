@@ -1,130 +1,166 @@
 # Laboratorio 3-3: Procesamiento SQL con Apache Hive
 
-## TABLAS SENCILLAS EN HIVE
+## Tablas sencillas en Hive
 
-## 1 Conexión al cluster Hadoop via HUE en Amazon EMR
+Los archivos de trabajo hdi-data.csv y export-data.csv
 
-Hue Web (cada uno tiene su propio cluster EMR)
-
-    http://ec2.compute-1.amazonaws.com:8888
-
-
-Usuarios: (entrar como hadoop/*********)
-
-    username: hadoop
-    password: ********
-
-## 2. Los archivos de trabajo hdi-data.csv y export-data.csv
-
-```
+```shell
 /user/hadoop/datasets/onu
 ```
 
-## 3. Gestión (DDL) y Consultas (DQL)
+## Gestión (DDL) y Consultas (DQL)
 
-### cada uno deberá crear su propia BD:
+Crear una base de datos:
 
-    CREATE DATABASE usernamedb
-
-### Crear la tabla HDI en Hive:
+```sql
+CREATE DATABASE ${username}db;
 ```
-# tabla manejada por hive: /user/hive/warehouse
+
+Crear la tabla HDI en Hive:
+
+tabla manejada por hive: /user/hive/warehouse
+```sql
 use usernamedb;
 CREATE TABLE HDI (id INT, country STRING, hdi FLOAT, lifeex INT, mysch INT, eysch INT, gni INT)
 ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
 STORED AS TEXTFILE
+```
 
-# se requiere cargar datos a la tabla asi:
-#
-# copiando datos directamente hacia hdfs:///warehouse/tablespace/managed/hive/mydb.db/hdi
+se requiere cargar datos a la tabla asi:
+copiando datos directamente hacia hdfs:///warehouse/tablespace/managed/hive/mydb.db/hdi
 
-$ hdfs dfs -cp hdfs:///user/hadoop/datasets/onu/hdi-data.csv hdfs:///warehouse/tablespace/managed/hive/hadoopdb.db/hdi
+```shell
+hdfs dfs -cp hdfs:///user/hadoop/datasets/onu/hdi-data.csv hdfs:///warehouse/tablespace/managed/hive/hadoopdb.db/hdi
+```
 
-#
-# cargardo datos desde hive:
+Cargando datos desde Hive:
 
-## darle primero permisos completos al directorio:
-## hdfs dfs -chmod -R 777 /user/hadoop/datasets/onu/
+Darle permisos completos al directorio con:
 
-$ load data inpath '/user/hadoop/datasets/onu/hdi-data.csv' into table HDI
+```shell
+hdfs dfs -chmod -R 777 /user/hadoop/datasets/onu/
+```
 
-# tabla externa en hdfs:
-use usernamedb;
+Cargar los datos:
+
+```sql
+LOAD DATA inpath '/user/hadoop/datasets/onu/hdi-data.csv' INTO TABLE HDI
+```
+
+Tabla externa con HDFS:
+
+```sql
+USE usernamedb;
 CREATE EXTERNAL TABLE HDI (id INT, country STRING, hdi FLOAT, lifeex INT, mysch INT, eysch INT, gni INT)
 ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
 STORED AS TEXTFILE
 LOCATION '/user/hadoop/datasets/onu2/hdi/'
+```
 
-# tabla externa en S3:
+Tabla externa con S3:
+
+```sql
 use usernamedb;
 CREATE EXTERNAL TABLE HDI (id INT, country STRING, hdi FLOAT, lifeex INT, mysch INT, eysch INT, gni INT)
 ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
 STORED AS TEXTFILE
-LOCATION 's3://username_datalake/datasets/onu2/hdi/'
-
+LOCATION 's3://${bucket-name}/datasets/onu2/hdi/'
 ```
 
-Nota: Esta tabla la crea en una BASE DE DATOS 'mydb'
-```
-use usernamedb;
-show tables;
-describe hdi;
+
+> [!NOTE]
+>
+> Esta tabla la crea en una base de datos `mydb`.
+
+```sql
+USE usernamedb;
+SHOW TABLES;
+DESCRIBE hdi;
 ```
 
-### hacer consultas y cálculos sobre la tabla HDI:
-```
+hacer consultas y cálculos sobre la tabla HDI:
+
+```sql
 select * from hdi;
-
 select country, gni from hdi where gni > 2000;
 ```
 
-### EJECUTAR UN JOIN CON HIVE:
+### Ejecutar un `JOIN` con Hive
+- Obtener los datos base: `export-data.csv`
+- Usar los datos en [`datasets`](../../../datasets/) de este repositorio.
+- Iniciar Hive y crear la tabla `EXPO`
 
-### Obtener los datos base: export-data.csv
+    ```sql
+    use usernamedb;
+    CREATE EXTERNAL TABLE EXPO (country STRING, expct FLOAT)
+    ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
+    STORED AS TEXTFILE
+    LOCATION 's3://{bucket-name}/datasets/onu2/export/'
+    ```
+- Ejecutar el `JOIN` de dos tablas
 
-usar los datos en 'datasets' de este repositorio.
+  ```sql
+  SELECT h.country, gni, expct
+  FROM HDI h
+  JOIN EXPO e
+  ON (h.country = e.country)
+  WHERE gni > 2000;
+  ```
 
-### Iniciar hive y crear la tabla EXPO:
+## Word count
 
-```
+### Creación de la tabla
+
+```sql
 use usernamedb;
-CREATE EXTERNAL TABLE EXPO (country STRING, expct FLOAT)
-ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
-STORED AS TEXTFILE
-LOCATION 's3://username_datalake/datasets/onu2/export/'
 ```
 
-### EJECUTAR EL JOIN DE 2 TABLAS:
-```
-SELECT h.country, gni, expct FROM HDI h JOIN EXPO e ON (h.country = e.country) WHERE gni > 2000;
-```
+#### Si es con HDFS
 
-## 4. WORDCOUNT EN HIVE:
-```
-use usernamedb;
+```sql
 CREATE EXTERNAL TABLE docs (line STRING)
 STORED AS TEXTFILE
 LOCATION 'hdfs://localhost/user/hadoop/datasets/gutenberg-small/';
+```
 
---- alternativa2:
+#### Si es con el bucket S3
+
+```sql
 CREATE EXTERNAL TABLE docs (line STRING)
 STORED AS TEXTFILE
-LOCATION 's3://username_datalake/datasets/gutenberg-small/';
+LOCATION 's3://${bucket-name}/datasets/gutenberg-small/';
 ```
 
-// ordenado por palabra
-```
-SELECT word, count(1) AS count FROM (SELECT explode(split(line,' ')) AS word FROM docs) w
+### Consultas
+
+#### Ordenado alfabéticamente
+
+```sql
+SELECT word, count(1)
+AS count
+FROM (
+    SELECT explode(split(line,' '))
+    AS word FROM docs
+    ) w
 GROUP BY word
 ORDER BY word DESC LIMIT 10;
 ```
-// ordenado por frecuencia de menor a mayor
-```
-SELECT word, count(1) AS count FROM (SELECT explode(split(line,' ')) AS word FROM docs) w
+
+#### Ordenado por frecuencia de menor a mayor
+
+```sql
+SELECT word, count(1)
+AS count
+FROM (
+    SELECT explode(split(line,' '))
+    AS word FROM docs
+    ) w
 GROUP BY word
 ORDER BY count DESC LIMIT 10;
 ```
 
-### RETO:
+### Reto adicional
 
-¿cómo llenar una tabla con los resultados de un Query? por ejemplo, como almacenar en una tabla el diccionario de frecuencia de palabras en el wordcount?
+¿Cómo llenar una tabla con los resultados de un query? Por ejemplo, ¿cómo
+almacenar en una tabla el diccionario de frecuencia de palabras en el word
+count?
