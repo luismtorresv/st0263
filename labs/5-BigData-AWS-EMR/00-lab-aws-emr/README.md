@@ -9,8 +9,8 @@
 
 - Ver [la guía de configuración del clúster](guia-configuracion-aws_emr-7.10.0-hadoop_spark.pdf).
 
-- También se deben conectar vía shell (ssh) al nodo master del clúster EMR,
-  donde realizará las actividades de HDFS CLI
+- También se deben conectar vía SSH al nodo master del clúster EMR,
+  donde realizarán las actividades de HDFS en la CLI.
 
 - Ver el [script para la configuración de arranque](install-my-jupyter-libraries.sh).
 
