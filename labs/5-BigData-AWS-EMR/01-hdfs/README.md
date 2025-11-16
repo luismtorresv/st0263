@@ -28,6 +28,8 @@ ssh -i ~/vockey.pem hadoop@ec2.compute-1.amazonaws.com
 
 Clonar este repositorio (pues contiene los datasets).
 
+Posiblemente necesite instalar git con el comando `sudo dnf install git`.
+
 > [!NOTE]
 >
 > Puede encontrar los datasets en el directorio [`datasets`](../../../datasets).
