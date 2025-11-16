@@ -63,12 +63,12 @@ hdfs dfs -mkdir /user/hadoop/datasets
 
 ### Copiar archivos locales (al servidor gateway) hacia HDFS
 
-Se asume que tiene los datos **locales** en `datasets` en el gateway.
-
-También están en este repositorio, y por terminal debería copiarlos por SSH/SCP
-al servidor gateway por la VPN.
-
-También están en Amazon S3: `s3://username_datalake/datasets`
+> [!NOTE]
+> Se asume que tiene los datos:
+> 1. Locales en `datasets` en el gateway (nodo maestro).
+> 2. También están [en este repositorio](../../../datasets/),
+>    y debería copiarlos por SCP al servidor gateway por la VPN (?).
+> 3. También están en Amazon S3: `s3://${bucket_name}/datasets`
 
 ```shell
 hdfs dfs -mkdir /user/hadoop/datasets
