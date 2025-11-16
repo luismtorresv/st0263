@@ -1,7 +1,4 @@
-# Universidad EAFIT
-# Curso ST0263 Tópicos Especiales en Telemática
-
-# LAB 3-3: PROCESAMIENTO SQL CON APACHE HIVE
+# Laboratorio 3-3: Procesamiento SQL con Apache Hive
 
 ## TABLAS SENCILLAS EN HIVE
 
