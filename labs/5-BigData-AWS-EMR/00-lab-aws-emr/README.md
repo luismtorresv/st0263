@@ -1,6 +1,6 @@
 # Laboratorio 3-0: Crear un clúster EMR en AWS
 
-## Vídeos paso a paso para la creación del clúter
+## Vídeos paso a paso para la creación del clúster
 
 - Parte 1: <https://www.youtube.com/watch?v=MyXSwxN5Zdk>
 - Parte 2: <https://www.youtube.com/watch?v=3sao-qJG34Y>
