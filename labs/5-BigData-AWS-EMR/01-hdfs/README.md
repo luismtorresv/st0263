@@ -79,6 +79,7 @@ hdfs dfs -mkdir /user/hadoop/datasets/gutenberg-small
 
 ```shell
 hdfs dfs -put ~/st0263/datasets/gutenberg-small/*.txt /user/hadoop/datasets/gutenberg-small/
+hdfs dfs -ls /user/hadoop/datasets/gutenberg-small/
 ```
 
 * Archivos en Amazon S3:
