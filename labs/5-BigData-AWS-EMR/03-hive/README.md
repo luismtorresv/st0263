@@ -44,25 +44,36 @@ TBLPROPERTIES ("skip.header.line.count"="1");
 
 ### Cargar datos a la tabla
 
-Copiar directamente hacia `hdfs:///warehouse/tablespace/managed/hive/mydb.db/hdi`.
+Podemos cargarlos de varias formas. Acá se describen dos formas:
+
+1. Copiar directamente el archivo usando el comando `hdfs`
+2. Usando Apache Hive para cargarlos.
+
+
+#### Cargando con `hdfs`
 
 ```shell
-hdfs dfs -cp hdfs:///user/hadoop/datasets/onu/hdi-data.csv hdfs:///warehouse/tablespace/managed/hive/hadoopdb.db/hdi
+hdfs dfs -cp \
+  /user/hadoop/datasets/onu/hdi-data.csv \
+  /user/hive/warehouse/${DB_NAME}.db/hdi
+
+hdfs dfs -ls /user/hive/warehouse/${DB_NAME}.db/hdi
 ```
 
-### Cargando datos desde Hive
+### Cargando datos con Hive
 
-Darle permisos completos al directorio con:
+1. Darle permisos completos al directorio con:
 
-```shell
-hdfs dfs -chmod -R 777 /user/hadoop/datasets/onu/
-```
+   ```shell
+   hdfs dfs -chmod -R 777 /user/hadoop/datasets/onu/
+   ```
 
-Cargar los datos:
+2. Cargar los datos:
 
-```sql
-LOAD DATA inpath '/user/hadoop/datasets/onu/hdi-data.csv' INTO TABLE HDI
-```
+   ```sql
+   LOAD DATA inpath '/user/hadoop/datasets/onu/hdi-data.csv'
+   INTO TABLE hdi
+   ```
 
 ### Tabla externa con HDFS
 
