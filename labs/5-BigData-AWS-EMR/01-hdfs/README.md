@@ -100,16 +100,18 @@ hdfs dfs -ls /user/hadoop/datasets
 
 #### Copiar archivos de HDFS hacia el sistema de archivos local
 
+Copiaremos solo el directorio `gutenberg-small`:
+
 ```shell
-hdfs dfs -get /user/hadoop/datasets/gutenberg-small/* ~<username>/mis_datasets/
+mkdir ~/mis_datasets
+hdfs dfs -get /user/hadoop/datasets/gutenberg-small/* ~/mis_datasets
+ls -l ~/mis_datasets
 ```
-El directorio `mis_datasets` debe estar creado.
 
 Otro comando para traer los datos:
 
 ```shell
-hdfs dfs -copyToLocal /user/hadoop/datasets/gutenberg/gutenberg-small.zip ~<username>/mis_datasets/
-
+hdfs dfs -copyToLocal /user/hadoop/datasets/gutenberg-small/* ~/mis_datasets/
 ls -l mis_datasets
 ```
 
