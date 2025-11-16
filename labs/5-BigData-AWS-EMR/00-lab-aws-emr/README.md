@@ -2,8 +2,8 @@
 
 ## Vídeos paso a paso para la creación del clúter
 
-- Parte 1: https://www.youtube.com/watch?v=MyXSwxN5Zdk
-- Parte 2: https://www.youtube.com/watch?v=3sao-qJG34Y
+- Parte 1: <https://www.youtube.com/watch?v=MyXSwxN5Zdk>
+- Parte 2: <https://www.youtube.com/watch?v=3sao-qJG34Y>
 
 ## Información adicional
 
