@@ -1,69 +1,84 @@
-# link de referencia del ejemplo:
-    https://aws.amazon.com/blogs/storage/running-wordpress-on-amazon-eks-with-amazon-efs-intelligent-tiering/
+# WordPress en AWS EKS con Amazon EFS
 
-## 1. creación del cluster EKS con 2 nodos en el 'node group', cluster llamado 'myeks'
+Referencia oficial: https://aws.amazon.com/blogs/storage/running-wordpress-on-amazon-eks-with-amazon-efs-intelligent-tiering/
 
-## 2. configuración del shell para acceder remotamente al cluster:
+## 1. Crear el clúster EKS
 
-    aws eks update-kubeconfig --region us-east-1 --name myeks
+- Cree un clúster llamado `myeks` con un node group de 2 nodos.
 
-    kubectl get nodes
+## 2. Configurar el shell para acceder al clúster
 
-ejemplo de salida:
+```bash
+aws eks update-kubeconfig --region us-east-1 --name myeks
+kubectl get nodes
+```
 
-    $ kubectl get nodes
-    NAME                            STATUS   ROLES    AGE   VERSION
-    ip-172-31-32-239.ec2.internal   Ready    <none>   24m   v1.32.3-eks-473151a
-    ip-172-31-81-246.ec2.internal   Ready    <none>   24m   v1.32.3-eks-473151a
-    $
+Ejemplo:
 
-## 3. crear un servicios AWS EFS y obtener el id, ejemplo: fs-0d2b5ff834bfe5f61
-### este id debe ser actualizado en el archivo: 02wordpress-deployment.yaml
+```bash
+$ kubectl get nodes
+NAME                            STATUS   ROLES    AGE   VERSION
+ip-172-31-32-239.ec2.internal   Ready    <none>   24m   v1.32.3-eks-473151a
+ip-172-31-81-246.ec2.internal   Ready    <none>   24m   v1.32.3-eks-473151a
+```
 
-## 4. verificar tener instalado 'helm', sino ver esta referencia: https://docs.aws.amazon.com/eks/latest/userguide/helm.html
+## 3. Crear el sistema de archivos EFS
 
-### para linux:
+- Cree un recurso EFS y anote su ID (por ejemplo, `fs-0d2b5ff834bfe5f61`).
+- Actualice ese ID en `02wordpress-deployment.yaml`.
 
-    curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
-    chmod 700 get_helm.sh
-    ./get_helm.sh
+## 4. Instalar Helm (si aplica)
 
-## 5. Instalar driver EFS para EKS:
+En Linux:
 
-    helm repo add aws-efs-csi-driver https://kubernetes-sigs.github.io/aws-efs-csi-driver/
+```bash
+curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+chmod 700 get_helm.sh
+./get_helm.sh
+```
 
-## 6. ejecutar el manifiesto de configuración de EFS en EKS:
+## 5. Agregar el repositorio del driver EFS
 
-    kubectl apply -f private-ecr-driver.yaml
+```bash
+helm repo add aws-efs-csi-driver https://kubernetes-sigs.github.io/aws-efs-csi-driver/
+```
 
-    helm repo update
-    
-    helm install aws-efs-csi-driver aws-efs-csi-driver/aws-efs-csi-driver \
-    --namespace kube-system \
-    --set controller.serviceAccount.create=false \
-    --set controller.serviceAccount.name=efs-csi-controller-sa
-    
-    Para confirmar que instaló pods de EFS:
-    
-    kubectl get pods -n kube-system | grep efs
+## 6. Instalar el driver EFS en EKS
 
-## 7. ejecutar el despliegue de mysql y wordpress en EKS:
+```bash
+kubectl apply -f private-ecr-driver.yaml
+helm repo update
+helm install aws-efs-csi-driver aws-efs-csi-driver/aws-efs-csi-driver \
+  --namespace kube-system \
+  --set controller.serviceAccount.create=false \
+  --set controller.serviceAccount.name=efs-csi-controller-sa
+kubectl get pods -n kube-system | grep efs
+```
 
-nota: no se utilizan los archivos mysql-deployment.yaml propuesto en la página de referencia, y se utiliza 01mysql-deployment.yaml depurado de varias fuentes.
+## 7. Desplegar MySQL y WordPress
 
-    kubectl apply -f 01mysql-deployment.yaml
-    kubectl apply -f 02wordpress-deployment.yaml
+> Se utiliza `01mysql-deployment.yaml` en lugar del manifiesto sugerido en la referencia oficial.
 
+```bash
+kubectl apply -f 01mysql-deployment.yaml
+kubectl apply -f 02wordpress-deployment.yaml
+```
 
-monitorear:
-    
-    kubectl get pods --watch
-    kubectl get all -o wide
+### Monitoreo
 
-conectarse a un pod:
+```bash
+kubectl get pods --watch
+kubectl get all -o wide
+```
 
-    kubectl exec -it <podname> /bin/bash
+### Acceder a un pod
 
-borrar wp:
-    
-    kubectl delete -k ./
+```bash
+kubectl exec -it <pod-name> -- /bin/bash
+```
+
+### Eliminar WordPress
+
+```bash
+kubectl delete -k ./
+```
