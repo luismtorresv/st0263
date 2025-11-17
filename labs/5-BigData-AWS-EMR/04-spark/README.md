@@ -30,7 +30,7 @@ Si quiere que se consolide en un solo archivo de salida:
 
 ## 2. Como un script de Python
 
-Ver, por ejemplo, el script [`wc-pyspark.py`](wc-pyspark.py).
+Ver, por ejemplo, el script [`wc-pyspark.py`](notebooks/wc-pyspark.py).
 
 Córralo con el comando:
 
@@ -89,11 +89,11 @@ ORDER BY word
 
 ## 4. Jupyter Notebooks
 
-Ver, por ejemplo, [`wordcount-spark.ipynb`](wordcount-spark.ipynb)
+Ver, por ejemplo, [`wordcount-spark.ipynb`](notebooks/wordcount-spark.ipynb)
 
 ## Dataframes y preparación de datos en pyspark
 
-- Notebook: [Data_processing_using_PySpark.ipynb](Data_processing_using_PySpark.ipynb)
+- Notebook: [Data_processing_using_PySpark.ipynb](notebooks/Data_processing_using_PySpark.ipynb)
 
 - Datos de ejemplo: [sample_data.csv](../../../datasets/spark/sample_data.csv)
 
@@ -146,19 +146,19 @@ sc.uninstall_package("nltk")
 ### 1. Ejecutar todos los notebooks del directorio actual
 
 1. Ejecutar
-  [`Data_processing_using_PySpark.ipynb`](Data_processing_using_PySpark.ipynb)
+  [`Data_processing_using_PySpark.ipynb`](notebooks/Data_processing_using_PySpark.ipynb)
   en:
   - EMR con datos en AWS S3.
   - Google Colab con datos en Google Drive.
   - Google Colab con datos en AWS S3.
 
-2. Ejecutar [`spark_colab_ejercicios`](spark_colab_ejercicios.ipynb) en:
+2. Ejecutar [`spark_colab_ejercicios`](notebooks/spark_colab_ejercicios.ipynb) en:
   - EMR con datos en AWS S3.
   - Google Colab con datos en Google Drive.
 
-3. Ejecutar [`wordcount-spark.ipynb`](wordcount-spark-colab.ipynb) en EMR.
+3. Ejecutar [`wordcount-spark.ipynb`](notebooks/wordcount-spark-colab.ipynb) en EMR.
 
-4. Ejecutar [`wordcount-spark-colab.ipynb`](wordcount-spark-colab.ipynb) en
+4. Ejecutar [`wordcount-spark-colab.ipynb`](notebooks/wordcount-spark-colab.ipynb) en
   Google Colab.
 
 5. Ejecutar [`wc-pyspark.py`](notebooks/wc-pyspark.py) en el nodo maestro de EMR.
