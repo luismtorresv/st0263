@@ -199,18 +199,19 @@ WHERE
       hdi.gni > 2000;
   ```
 
-## Word count
-
-### Creación de la tabla
-
-```sql
-use ${username}db;
-```
+## Conteo de palabras ("word count")
 
 #### Si es con HDFS
 
 ```sql
-CREATE EXTERNAL TABLE docs (line STRING)
+use ${username}db;
+
+
+CREATE
+EXTERNAL
+TABLE docs (
+    line STRING
+)
 STORED AS TEXTFILE
 LOCATION 'hdfs://localhost/user/hadoop/datasets/gutenberg-small/';
 ```
@@ -218,7 +219,14 @@ LOCATION 'hdfs://localhost/user/hadoop/datasets/gutenberg-small/';
 #### Si es con el bucket S3
 
 ```sql
-CREATE EXTERNAL TABLE docs (line STRING)
+use ${username}db;
+
+
+CREATE
+EXTERNAL
+TABLE docs (
+    line STRING
+)
 STORED AS TEXTFILE
 LOCATION 's3://${bucket-name}/datasets/gutenberg-small/';
 ```
