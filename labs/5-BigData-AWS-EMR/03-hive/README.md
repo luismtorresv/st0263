@@ -78,36 +78,65 @@ hdfs dfs -ls /user/hive/warehouse/${DB_NAME}.db/hdi
 ### Tabla externa con HDFS
 
 ```sql
-USE ${username}db;
-CREATE EXTERNAL TABLE HDI (id INT, country STRING, hdi FLOAT, lifeex INT, mysch INT, eysch INT, gni INT)
-ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
+use ${username}db;
+
+
+CREATE
+EXTERNAL
+TABLE hdi_hdfs (
+    id INT,
+    country STRING,
+    hdi FLOAT,
+    lifeex INT,
+    mysch INT,
+    eysch INT,
+    gni INT
+)
+
+ROW FORMAT DELIMITED FIELDS
+TERMINATED BY ','
 STORED AS TEXTFILE
 LOCATION '/user/hadoop/datasets/onu2/hdi/'
+TBLPROPERTIES ("skip.header.line.count"="1");
 ```
 
 ### Tabla externa con S3
 
 ```sql
 use ${username}db;
-CREATE EXTERNAL TABLE HDI (id INT, country STRING, hdi FLOAT, lifeex INT, mysch INT, eysch INT, gni INT)
-ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
+
+
+CREATE
+EXTERNAL
+TABLE hdi_s3 (
+    id INT,
+    country STRING,
+    hdi FLOAT,
+    lifeex INT,
+    mysch INT,
+    eysch INT,
+    gni INT
+)
+
+ROW FORMAT DELIMITED FIELDS
+TERMINATED BY ','
 STORED AS TEXTFILE
-LOCATION 's3://${bucket-name}/datasets/onu2/hdi/'
+LOCATION 's3://${bucket-name}/datasets/onu/hdi/'
+TBLPROPERTIES ("skip.header.line.count"="1");
 ```
 
-> [!NOTE]
->
-> Esta tabla la crea en una base de datos `mydb`.
+## Revisando que las tablas estén cargadas
 
 ```sql
 USE ${username}db;
 SHOW TABLES;
-DESCRIBE hdi;
+DESCRIBE hdi_hdfs;
+DESCRIBE hdi_s3;
 ```
 
 ## Consultas
 
-Hacer consultas y cálculos sobre la tabla `hdi`:
+Hacer consultas y cálculos sobre la tabla `hdi`.
 
 ### Ejemplos
 
