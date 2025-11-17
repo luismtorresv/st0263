@@ -163,25 +163,40 @@ WHERE
 
 ### Ejecutar un `JOIN` con Hive
 
-- Obtener los datos base: `export-data.csv`
 - Usar los datos en [`datasets`](../../../datasets/) de este repositorio.
-- Iniciar Hive y crear la tabla `EXPO`
+
+- Iniciar Hive y crear la tabla `expo`
 
     ```sql
     use ${username}db;
-    CREATE EXTERNAL TABLE EXPO (country STRING, expct FLOAT)
-    ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
+
+
+    CREATE
+    EXTERNAL
+    TABLE expo (
+        country STRING,
+        expct FLOAT
+    )
+
+    ROW FORMAT DELIMITED FIELDS
+    TERMINATED BY ','
     STORED AS TEXTFILE
-    LOCATION 's3://{bucket-name}/datasets/onu2/export/'
+    LOCATION 's3://${bucket-name}/datasets/onu/export/'
+    TBLPROPERTIES ("skip.header.line.count"="1");
     ```
+
 - Ejecutar el `JOIN` de dos tablas
 
   ```sql
-  SELECT h.country, gni, expct
-  FROM HDI h
-  JOIN EXPO e
-  ON (h.country = e.country)
-  WHERE gni > 2000;
+  SELECT
+      hdi.country,
+      hdi.gni,
+      expo.expct
+  FROM
+      HDI hdi
+      JOIN EXPO expo ON (hdi.country = expo.country)
+  WHERE
+      hdi.gni > 2000;
   ```
 
 ## Word count
