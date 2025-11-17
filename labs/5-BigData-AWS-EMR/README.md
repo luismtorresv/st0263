@@ -1,54 +1,56 @@
-# Universidad EAFIT # Curso ST0263 Tópicos Especiales en Telemática
+# Laboratorios de Big Data
 
-Requisito: CADA ESTUDIANTE, EN SU REPOSITORIO GITHUB PARA LA MATERIA, DEBERÁ
-DOCUMENTAR Y ADJUNTAR TODAS LAS EVIDENCIAS DE LA REALIZACIÓN DE LOS
-LABORATORIOS DE BIG DATA.
+> [!IMPORTANT]
+>
+> Cada estudiante debe documentar y adjuntar toda la evidencia de los
+> laboratorios de Big Data en su repositorio de GitHub para la asignatura.
+> Además, debe compartir con el profesor, mediante Interactiva Virtual, la URL
+> exacta del repositorio y del directorio donde trabaja los laboratorios.
 
-CADA ALUMNO, DEBERÁ ENVIAR EXPLICITAMENTE AL PROFESOR POR INTERACTIVA VIRTUAL,
-LA URL DEL REPOSITORIO Y DIRECTORIO DONDE TRABAJARÁ TODOS LOS LABS.
+## Conexión al clúster
 
-## CONEXIÓN AL CLUSTER
+### Amazon EMR
 
-### Amazon EMR:
+Cree su propio clúster siguiendo los videos guía sobre la creación y el uso de
+Amazon EMR con la cuenta de AWS Academy. Recuerde verificar los prerequisitos de
+red, seguridad y configuración antes de ejecutar cualquier laboratorio.
 
-Creando tu propio cluster, videos guia de como crear y usar cluser Amazon EMR
-con la cuenta  AWS Academy
+> [!TIP]
+>
+> Usted puede reutilizar las configuraciones de clúster como plantillas para
+> acelerar futuras implementaciones y garantizar consistencia en los ejercicios.
 
-## DATASETS
+## Datasets
 
-* [datasets](../../datasets)
+Nos referiremos a los [`datasets`](../../datasets) a lo largo de los tutoriales.
 
-### Crear y gestionar Clusters Amazon EMR
+## Creación y gestión de clústeres Amazon EMR
 
-Utilizando la cuenta de amazon academy, y los videos compartidos para la clase,
-aprender a crear:
+Utilizando la cuenta de AWS Academy y el material suministrado, usted debe aprender a configurar:
 
-* cluster Amazon EMR
-* AWS CLI
-* Archivos en S3
-* Notebooks Jupyter
+- Clústeres Amazon EMR
+- AWS CLI
+- Almacenamiento de archivos en S3
+- Notebooks Jupyter
 
-# Laboratorios
+## Laboratorios
 
 ### Gestión de archivos en S3 y HDFS
 
-VER MÁS INDICACIONES EN:
 
-* Todos los laboratorios, los debe documentar, con evidencias, en el documento:
-  [st0263-252-labs-student.docx](st0263-252-labs-student.docx)
+> [!NOTE]
+>
+> Mantenga capturas de pantalla, scripts y bitácoras para cada laboratorio. Esto facilitará la evaluación y servirá como referencia para futuros proyectos.
 
-*[Lab3-1](01-hdfs/lab3-1-hdfs-s3.md)
+> [!NOTE]
+>
+> Documente todos los laboratorios con la plantilla oficial: [st0263-252-labs-student.docx](st0263-252-labs-student.docx).
 
-Copiar todos los archivos del [datasets](../../datasets) tanto en S3 (permanente) y
-en HDFS (temporales).
+- [Lab3-1: Gestión de archivos entre HDFS y S3](01-hdfs/README.md)
+  Copie los archivos de [datasets](../../datasets) tanto en S3 (almacenamiento permanente) como en HDFS (almacenamiento temporal).
 
-* ver: [HDFS](01-hdfs)
+- [Lab3-2: Datalake con AWS S3, Glue y Athena](02-athena/lab-s3-glue-athena.pdf)
 
-*[Lab3-2 Datalake con AWS S3 y Motor de consulta Glue y
-Athena](lab3-2-s3-glue-athena.pdf)
+- [Lab3-3: Hadoop con motor de consulta Hive integrado con S3, Glue y Athena](03-hive/README.md)
 
-*[Lab3-3 Hadoop motor de consulta Hive + integrado con
-S3/Glue/Athena](02-hive/lab3-3-hive.md)
-
-*[Lab3-4 Hadoop Spark desde EMR/JupyerHub y Google Colab, tanto Spark SQL como
-Spark DF](03-spark/lab3-4-spark.md)
+- [Lab3-4: Hadoop Spark desde EMR, JupyterHub y Google Colab (Spark SQL y DataFrames)](04-spark/README.md)

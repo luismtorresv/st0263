@@ -161,7 +161,7 @@ sc.uninstall_package("nltk")
 4. Ejecutar [`wordcount-spark-colab.ipynb`](wordcount-spark-colab.ipynb) en
   Google Colab.
 
-1. Ejecutar [`wc-pyspark.py`](wc-pyspark.py) en el nodo maestro de EMR.
+5. Ejecutar [`wc-pyspark.py`](notebooks/wc-pyspark.py) en el nodo maestro de EMR.
 
 > [!WARNING]
 >
