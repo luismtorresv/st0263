@@ -87,7 +87,7 @@ hdfs dfs -ls /user/hadoop/datasets/gutenberg-small/
 #### Copiar `datasets/airlines.csv` de S3 a HDFS
 
 ```shell
-hadoop distcp s3://${username_datalake}/datasets/airlines.csv /tmp/
+hadoop distcp s3://${bucket_name}/datasets/airlines.csv /tmp/
 hdfs dfs -ls /tmp/
 ```
 
