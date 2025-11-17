@@ -1,179 +1,210 @@
-# Universidad EAFIT
-## Curso ST0263 Tópicos Especiales en Telemática
-### LAB SPARK
+# Laboratorio 3-4: Spark
 
-- Se puede programar en python, scala o java.
-- ejemplos en python:
+## Contextualización de diferentes formas de correr Spark
 
-## 1. De forma interactiva via `pyspark`
+### 1. De forma interactiva via `pyspark`
 
-> // ya trae preconfigurado las variables sc y spark
+Inicie PySpark:
 
-```bash
+```shell
 $ pyspark
->>> files = sc.textFile("s3://username_datalake/datasets/gutenberg-small/*.txt")
+>>>
+```
+
+Ya trae preconfigurado las variables `spark` y `sc`.
+
+Así salva la variable `wc` un archivo por
+[Resilient Distributed Dataset (RDD)](https://www.databricks.com/glossary/what-is-rdd).
+
+```python
+>>> files = sc.textFile("s3://${bucket_name}/datasets/gutenberg-small/*.txt")
 >>> wc = files.flatMap(lambda line: line.split(" ")).map(lambda word: (word, 1)).reduceByKey(lambda a, b: a + b)
->>> wc.saveAsTextFile("hdfs:///tmp/wcout1")
+>>> wc.saveAsTextFile("hdfs:///tmp/wcount1")
 ```
 
-- asi salva wc un archivo por rdd.
-- si quiere que se consolide en un solo archivo de salida:
+Si quiere que se consolide en un solo archivo de salida:
 
-```bash
-$ pyspark
->>> files = sc.textFile("s3://username_datalake/datasets/gutenberg-small/*.txt")
->>> wc = files.flatMap(lambda line: line.split(" ")).map(lambda word: (word, 1)).reduceByKey(lambda a, b: a + b)
->>> wc.coalesce(1).saveAsTextFile("hdfs:///tmp/wcout2")
+```python
+>>> wc.coalesce(1).saveAsTextFile("hdfs:///tmp/wcount2")
 ```
 
-## 2. Como un archivo python: [wc-pyspark.py](wc-pyspark.py)
+## 2. Como un script de Python
 
-- correrlo:
+Ver, por ejemplo, el script [`wc-pyspark.py`](wc-pyspark.py).
 
-```bash
-$ spark-submit --master yarn --deploy-mode cluster wc-pyspark.py
+Córralo con el comando:
+
+```shell
+spark-submit \
+  --master yarn \
+  --deploy-mode cluster \
+  wc-pyspark.py
 ```
 
-## 3. Desde Zeppelin Nodebook:
+## 3. Desde Zeppelin
 
-- Entre desde un browser a: http://ip-or-name-amazon-host:9995 o el servidor que le desigen para el lab
-- Si es en EMR, por defecto NO tiene login/pass
+Entre desde un navegador a Zeppelin. Si está usando AWS EMR, por defecto no tiene que iniciar sesión.
 
-### Wordcount en python:
+### Python
 
 ```python
 %spark2.pyspark
-files = sc.textFile("s3://username_datalake/datasets/gutenberg-small/*.txt")
+files = sc.textFile("s3://${bucket_name}/datasets/gutenberg-small/*.txt")
 wc = files.flatMap(lambda line: line.split(" ")).map(lambda word: (word, 1)).reduceByKey(lambda a, b: a + b)
-wc.coalesce(1).saveAsTextFile("hdfs:///tmp/wcout1")
+wc.coalesce(1).saveAsTextFile("hdfs:///tmp/wcount2")
 ```
 
-### wordcount en spark.sql en zeppelin
+### SparkSQL
 
 ```sql
 %spark2.sql
 SHOW tables
+```
 
+```sql
 %spark2.sql
 SHOW database
+```
 
+```sql
 %spark2.sql
 USE <user_vpn>
+```
 
+```sql
 %spark2.sql
-CREATE EXTERNAL TABLE <user_vpn>.docs2 (line STRING) stored as textfile location '/datasets/gutenberg-small/*.txt'
+CREATE EXTERNAL TABLE
+<user_vpn>.docs2 (line STRING)
+STORED AS textfile LOCATION '/datasets/gutenberg-small/*.txt'
+```
 
+```sql
 %spark2.sql
-SELECT word, count(1) AS count FROM (SELECT explode(split(line,' ')) AS word FROM docs2) w GROUP BY word ORDER BY word
+SELECT word, count(1)
+AS count
+FROM (SELECT explode(split(line,' ')) AS word FROM docs2) w
+GROUP BY word
+ORDER BY word
 ```
 
 ## 4. Jupyter Notebooks
 
-### Wordcount [wordcount-spark.ipynb](wordcount-spark.ipynb)
+Ver, por ejemplo, [`wordcount-spark.ipynb`](wordcount-spark.ipynb)
 
-### Dataframes y preparación de datos en pyspark
+## Dataframes y preparación de datos en pyspark
 
-- notebook: [Data_processing_using_PySpark.ipynb](Data_processing_using_PySpark.ipynb)
-- datos ejemplo: [sample_data.csv](../../../datasets/spark/sample_data.csv)
+- Notebook: [Data_processing_using_PySpark.ipynb](Data_processing_using_PySpark.ipynb)
 
-### Manejo de notebooks en EMR
+- Datos de ejemplo: [sample_data.csv](../../../datasets/spark/sample_data.csv)
 
-- varias opciones:
-  - a través del servicio jupyterhub como componente de EMR
-  - Notebooks como servicio de amazon para EMR (opción a trabajar)
+## Manejo de notebooks en EMR
 
-Para trabajar con los notebooks gestionados por amazon, la gestión de paquetes, versión de python puede ser consultado en:
+Tiene varias opciones:
 
-https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-managed-notebooks-scoped-libraries.html
+- A través del servicio JupyterHub como componente de EMR
 
-- Opciones importantes:
-  - cambiar versión de python:
+- Notebooks como servicio de AWS para EMR (opción a trabajar)
 
-    ```bash
-    %%configure -f
-    { "conf":{
-    "spark.pyspark.python": "python3",
-    "spark.pyspark.virtualenv.enabled": "true",
-    "spark.pyspark.virtualenv.type":"native",
-    "spark.pyspark.virtualenv.bin.path":"/usr/bin/virtualenv"
-    }}
-    ```
+Para trabajar con los notebooks gestionados por AWS, la gestión de paquetes,
+versión de Python puede ser consultado en
+[la documentación de AWS](https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-managed-notebooks-scoped-libraries.html).
 
-  - Example – Listing Current Libraries
+### Opciones importantes
 
-    ```python
-    sc.list_packages()
-    ```
+#### Cambiar versión de Python
 
-  - Example – Installing the NLTK Library
+```shell
+%%configure -f
+{ "conf":{
+"spark.pyspark.python": "python3",
+"spark.pyspark.virtualenv.enabled": "true",
+"spark.pyspark.virtualenv.type":"native",
+"spark.pyspark.virtualenv.bin.path":"/usr/bin/virtualenv"
+}}
+```
 
-    ```python
-    sc.install_pypi_package("nltk")
-    ```
+#### Listar bibliotecas actuales
 
-  - Example – Uninstalling a Library
+```python
+sc.list_packages()
+```
 
-    ```python
-    sc.uninstall_package("nltk")
-    ```
+#### Instalar una biblioteca
 
-====
+```python
+sc.install_pypi_package("nltk")
+```
 
-# Universidad EAFIT
-## Curso ST0263 Tópicos Especiales en Telemática
+#### Desinstalar una biblioteca
 
-# LAB  de SPARK
+```python
+sc.uninstall_package("nltk")
+```
 
-## Realizar las siguientes actividades y adjuntar las evidencias:
+## Actividades del laboratorio
 
-### 1. ejecutar todos los notebooks que se encuentran en el directorio '03-spark' tanto en AWS EMR Jupyerhub como en Google Colab.
+### 1. Ejecutar todos los notebooks del directorio actual
 
-Notebooks:
+1. Ejecutar
+  [`Data_processing_using_PySpark.ipynb`](Data_processing_using_PySpark.ipynb)
+  en:
+  - EMR con datos en AWS S3.
+  - Google Colab con datos en Google Drive.
+  - Google Colab con datos en AWS S3.
 
-- ejecutar: `Data_processing_using_PySpark.ipynb` en los siquientes ambientes:
-  - EMR con datos en AWS S3
-  - Google Colab con datos en Google Drive
-  - Google Colab con datos en AWS S3
-- ejecutar: `spark_colab_ejercicios` en los siguientes ambientes:
-  - EMR con datos en AWS S3
-  - Google Colab con datos en Google Drive
-- ejecutar: `wordcount-spark.ipynb` (en EMR) y `wordcount-spark-colab.ipynb` (en Google Colab)
-- ejercutar: `wc-pyspark.py` en el nodo master de EMR
+2. Ejecutar [`spark_colab_ejercicios`](spark_colab_ejercicios.ipynb) en:
+  - EMR con datos en AWS S3.
+  - Google Colab con datos en Google Drive.
 
-### Como evidencia de la ejecución de estos notebooks, deberá adjuntar los notebooks con los resultados de la ejecución celda por celda en cada uno de los ambientes solicitados, o en caso de no poderse -> tomar pantallazos.
+3. Ejecutar [`wordcount-spark.ipynb`](wordcount-spark-colab.ipynb) en EMR.
 
-### 2. BASADO EN LOS DATOS DE COVID19, realice procesamiento básico a nivel de dataframe y  cálculos de estadistica básica descriptiva y procesamiento de datos categoricos (groupBy + Operación) basados en las siguientes preguntas de negocio:
+4. Ejecutar [`wordcount-spark-colab.ipynb`](wordcount-spark-colab.ipynb) en
+  Google Colab.
 
-#### Procesamiento Básico a nivel de dataframes:
+1. Ejecutar [`wc-pyspark.py`](wc-pyspark.py) en el nodo maestro de EMR.
 
-- carga de datos csv en spark desde un bucket S3 (desde EMR con Notebooks administrados y con el servicio jupyterhub, desde Google Colab y se deja opcionalmente desde boto3)
-- borrar y crear algunas columnas
-- realizar filtrados de datos por alguna información que le parezca interesante
-- realizar alguna agrupación y consulta de datos categorica, por ejemplo número de casos por región o por sexo/genero.
-- finalmente salve los resultados en un bucket público en S3
-- realice toda la documentación en el mismo notebook.
+> [!WARNING]
+>
+> Para las evidencias, adjunte los notebooks con las celdas ejecutadas en cada
+> ambiente solicitado. Si no es posible, aporte pantallazos que demuestren la
+> ejecución completa.
 
-Los datos los van a obtener de:
+### 2. Basarse en los datos de COVID-19 para realizar procesamiento
 
-- https://www.datos.gov.co/Salud-y-Protecci-n-Social/Casos-positivos-de-COVID-19-en-Colombia/gt2j-8ykr/data
+#### Procesamiento básico con DataFrames
 
-o en los [datasets](../../../datasets) hay datos ejemplo de covid19 para colombia.
+1. Cargar datos CSV en Spark desde un bucket S3 (EMR con notebooks administrados
+   o JupyterHub), desde Google Colab y, opcionalmente, mediante boto3.
+2. Borrar y crear columnas según sea necesario.
+3. Aplicar filtros que resulten interesantes para el análisis.
+4. Realizar agrupaciones y consultas categóricas (por ejemplo, casos por región o
+   sexo/género).
+5. Guardar los resultados en un bucket público de S3.
+6. Documentar todo el flujo dentro del notebook.
 
-#### Responder a las siguientes preguntas de negocio tanto con procesamiento con Dataframes como en SparkSQL:
+> [!TIP]
+>
+> Los datos pueden descargarse desde
+> [este enlace](https://www.datos.gov.co/Salud-y-Protecci-n-Social/Casos-positivos-de-COVID-19-en-Colombia/gt2j-8ykr/data).
 
-Ver ejemplo de procesamiento en SparkSQL en:
-https://www.oreilly.com/library/view/learning-spark-2nd/9781492050032/ch04.html
+> [!NOTE]
+>
+> El directorio [`datasets`](../../../datasets) contiene ejemplos locales.
 
-- Los 10 departamentos con más casos de covid en Colombia ordenados de mayor a menor.
-- Las 10 ciudades con más casos de covid en Colombia ordenados de mayor a menor.
-- Los 10 días con más casos de covid en Colombia ordenados de mayor a menor.
-- Distribución de casos por edades de covid en Colombia.
-- Realice la pregunda de negocio que quiera sobre los datos y respondala con la correspondiente programación en spark.
+#### Preguntas de negocio con DataFrames y SparkSQL
 
-Reiteración: estas preguntas de negocio deben ser resueltas tanto en Dataframes como en SQL con Spark.
+1. Los 10 departamentos con más casos de COVID-19 en Colombia, ordenados de
+  mayor a menor.
+2. Las 10 ciudades con más casos de COVID-19 en Colombia, ordenadas de mayor a
+  menor.
+3. Los 10 días con más casos de COVID-19 en Colombia, ordenados de mayor a
+   menor.
+4. Distribución de casos por edades en Colombia.
+5. Una pregunta de negocio adicional definida por usted y resuelta en Spark.
 
-Requerimiento, los datos de salida de estas 5 preguntas de negocio, deben ser salvadas en archivos tanto en formato .csv como .parquet.
+### Requerimientos de salida y entrega
 
-Los datos deben ser salvados en S3 y en Google Drive segun sea el ambiente de ejecución.
-
-Debe probarlos en ambos ambientes de ejecución y adjuntar como evidencia los notebooks en colab y emr, con los resultados en cada celda ejecutada.
+- Resuelva cada pregunta tanto con DataFrames como con SparkSQL.
+- Guarde los resultados en formatos `.csv` y `.parquet`, almacenados en S3 y en
+Google Drive según el ambiente de ejecución.
+- Entregue los notebooks de Colab y EMR con todas las celdas ejecutadas.
