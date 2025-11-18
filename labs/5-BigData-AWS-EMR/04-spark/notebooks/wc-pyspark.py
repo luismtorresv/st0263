@@ -3,7 +3,7 @@ from pyspark.sql import SparkSession
 spark = SparkSession.builder.appName("WordCount").getOrCreate()
 sc = spark.sparkContext
 
-files = sc.textFile("s3://${username_datalake}/datasets/gutenberg-txt-es/*.txt")
+files = sc.textFile("s3://lmtorresv-datalake/datasets/gutenberg-small/*.txt")
 wc = (
     files.flatMap(lambda line: line.split(" "))
     .map(lambda word: (word, 1))
