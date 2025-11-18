@@ -9,4 +9,4 @@ wc = (
     .map(lambda word: (word, 1))
     .reduceByKey(lambda a, b: a + b)
 )
-wc.coalesce(1).saveAsTextFile("hdfs:///tmp/wcout1")
+wc.coalesce(1).saveAsTextFile("hdfs:///tmp/wcount1")
